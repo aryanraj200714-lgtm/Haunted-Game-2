@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Haunted Mahal PRO</title><link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial;
+      color: white;
+      text-align: center;
+      background: url("https://images.unsplash.com/photo-1505842465776-3d90f616310d") no-repeat center center/cover;
+    }
+
+    #overlay {
+      background: rgba(0,0,0,0.6);
+      height: 100vh;
+      padding-top: 50px;
+    }
+
+    img {
+      width: 200px;
+      border-radius: 10px;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: crimson;
+      color: white;
+    }
+
+    button:hover {
+      background: darkred;
+    }
+
+    #story {
+      margin: 20px;
+      font-size: 18px;
+    }
+
+    #meter {
+      font-size: 20px;
+      color: lightgreen;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="overlay">
+
+<h1>👻 Haunted Mahal</h1>
+
+<img id="ghost" src="https://i.imgur.com/ZSmUl7H.jpeg">
+
+<p id="story">
+Tum ek haunted mahal me phas gaye ho... ek sundar bhootni saamne aati hai 😈
+</p>
+
+<div id="meter">❤️ Trust: 0</div>
+
+<div id="choices">
+  <button onclick="stay()">Rukkar baat karo</button>
+  <button onclick="escape()">Bhago</button>
+</div>
+
+<audio id="sound" src="https://www.soundjay.com/horror/horror-sound-01.mp3"></audio>
+
+</div>
+
+<script>
+let trust = 0;
+let day = 1;
+
+function playSound(){
+  document.getElementById("sound").play();
+}
+
+function stay(){
+  trust += 2;
+  update();
+
+  document.getElementById("story").innerText =
+  "Bhootni muskuraati hai... wo tumse impress ho rahi hai 👻";
+
+  document.getElementById("ghost").src =
+  "https://i.imgur.com/ZSmUl7H.jpeg";
+
+  playSound();
+
+  document.getElementById("choices").innerHTML =
+  '<button onclick="help()">Uski madad karo</button>' +
+  '<button onclick="escape()">Chupke bhago</button>';
+}
+
+function help(){
+  trust += 3;
+  update();
+
+  document.getElementById("story").innerText =
+  "Tumne uska raaz solve kiya 🧩";
+
+  checkEnding();
+}
+
+function escape(){
+  document.getElementById("story").innerText =
+  "Day " + day + ": Tum bhaagne ki koshish kar rahe ho 😨";
+
+  document.getElementById("ghost").src =
+  "https://i.imgur.com/jxWqIBf.jpeg";
+
+  playSound();
+
+  day++;
+
+  if(day > 3){
+    checkEnding();
+  }
+}
+
+function update(){
+  document.getElementById("meter").innerText =
+  "❤️ Trust: " + trust;
+}
+
+function checkEnding(){
+  if(trust >= 5){
+    document.getElementById("story").innerText =
+    "💖 Tumne bhootni ka trust jeet liya! Happy ending 👻✨";
+  } else {
+    document.getElementById("story").innerText =
+    "🏃 Tum mushkil se bachkar nikal gaye!";
+  }
+  document.getElementById("choices").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
